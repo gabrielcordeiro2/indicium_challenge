@@ -1,7 +1,6 @@
 from sqlalchemy import create_engine, text
 from base_logger import BaseLogger
 from dotenv import load_dotenv
-import logging
 import sys
 import os
 

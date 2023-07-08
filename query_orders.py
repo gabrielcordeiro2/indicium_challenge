@@ -3,7 +3,6 @@ from base_logger import BaseLogger
 from datetime import datetime
 from dotenv import load_dotenv
 import pandas as pd
-import logging
 import sys
 import os
 
@@ -32,7 +31,7 @@ class StepTwoQueryOrders(BaseLogger):
     def execute(self):
         try:
             self.query_results()
-            self.logger.warning("Query executada com sucesso, o resultado foi salvo em 'data/query_result.csv'.")
+            self.logger.warning("Query executed successfully, the result was saved in 'data/query_result.csv'.")
         except Exception as exc:
             self.logger.warning(exc)
             sys.exit(1)

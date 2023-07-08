@@ -35,15 +35,8 @@ def check_execution_status(date, logger=logging):
             date_obj = datetime.strptime(date, "%Y-%m-%d").date()
             new_date = date_obj+timedelta(days=1)
             new_date = new_date.strftime("%Y-%m-%d")
-            logger.warning(f"Erro no processo de carregamento em '{date}', execute a etapa 1 de extracao do novamente no dia '{new_date}'.")
+            logger.warning(f"Error in loading process on '{date}', please perform extract step 1 again on day '{new_date}'.")
             sys.exit(1)
-
-        # if not northwind_status:
-        #     logger.warning("Por favor, execute o processo de 'Northwind_db' de extracao da data especificada.")
-        #     sys.exit(1)
-        # if not orders_status:
-        #     logger.warning("Por favor, execute o processo de 'Order_details' de extracao da data especificada.")
-        #     sys.exit(1)
 
     except Exception as exc:
         logging.error(exc, exc_info=True)
@@ -74,7 +67,7 @@ class NorthwindToFinalDB(BaseLogger):
             os.makedirs(self._northwind_path)
         northwind_tables = os.listdir(self._northwind_path)
         if not northwind_tables:
-            self.__logger.warning("Tabelas de 'Northwind' nao foram carregadas.")
+            self.__logger.warning("'Northwind' tables not loaded.")
             sys.exit(1)
         return northwind_tables
 
@@ -90,7 +83,7 @@ class NorthwindToFinalDB(BaseLogger):
             tables = self.setup_initial_paths()
 
             self.populate_database(date, tables)
-            self.__logger.warning("Carregamento concluido com sucesso.")
+            self.__logger.warning("Upload completed successfully.")
         except Exception as exc:
             self.__logger.error(exc, exc_info=True)
             sys.exit(1)
@@ -113,7 +106,7 @@ class OrdersToFinalDB(BaseLogger):
             os.makedirs(self.order_details_path)
         order_details_table = os.listdir(self.order_details_path)
         if not order_details_table:
-            self.logger.warning("Tabela de 'Order_details' nao foi carregada.")
+            self.logger.warning("'Order_details' table not loaded.")
             sys.exit(1)
 
     def populate_database(self, date):
@@ -128,7 +121,7 @@ class OrdersToFinalDB(BaseLogger):
         try:
             self.setup_initial_paths()
             self.populate_database(date=date)
-            self.logger.warning("Carregamento concluido com sucesso.")
+            self.logger.warning("Upload completed successfully.")
         except Exception as exc:
             self.logger.error(exc, exc_info=True)
 

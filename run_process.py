@@ -6,7 +6,6 @@ from query_orders import StepTwoQueryOrders
 from base_logger import BaseLogger
 
 from datetime import datetime
-import logging
 
 def data_validated(raw_date):
     try:
@@ -19,22 +18,6 @@ def data_validated(raw_date):
 class IndiciumPipeline(BaseLogger):
     def __init__(self):
         self.logger = self.setup_logger("MAIN:EXECUTOR")
-
-    # def setup_logger(self):
-    #     ''' Setup log configuration in 'process_monitor.log' '''
-    #     logger = logging.getLogger("MAIN:EXECUTOR")
-    #     logger.setLevel(logging.WARNING)
-    #     if not logger.handlers:
-    #         formatter = logging.Formatter("MAIN:EXECUTOR:%(asctime)s:%(message)s", datefmt="%Y:%m:%d_%H:%M")
-
-    #         file_handler = logging.FileHandler("process_monitor.log")
-    #         file_handler.setFormatter(formatter)
-    #         logger.addHandler(file_handler)
-
-    #         stream_handler = logging.StreamHandler()
-    #         stream_handler.setFormatter(formatter)
-    #         logger.addHandler(stream_handler)
-    #     return logger
     
     def execute(self, date):
         self.logger.warning("Starting pipeline ...")

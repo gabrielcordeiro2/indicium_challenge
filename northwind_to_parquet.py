@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from datetime import datetime
 import pandas as pd
 import warnings
-import logging
 import json
 import sys
 import os
@@ -75,7 +74,7 @@ class StepOneNorthwind(BaseLogger):
                 file_name = f'{table_name}.parquet'
                 df.to_parquet(file_path+file_name)
             self.add_execution_info(data_source='northwind_db', msg='Success', date=date)
-            self.logger.warning("Extracao concluida com sucesso.")
+            self.logger.warning("Extraction completed successfully.")
         except Exception as exc:
             self.logger.error(exc, exc_info=True)
             self.add_execution_info(data_source='northwind_db', msg='Failed', date=date)

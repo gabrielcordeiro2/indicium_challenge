@@ -1,7 +1,6 @@
 from base_logger import BaseLogger
 from datetime import datetime
 import pandas as pd
-import logging
 import json
 import sys
 import os
@@ -51,7 +50,7 @@ class StepOneOrders(BaseLogger):
         try:
             self.csv_to_parquet(raw_file_path="data/order_details.csv", separator=',', date=date)
             self.add_execution_info(data_source='order_details', msg='Success', date=date)
-            self.logger.warning("Extracao concluida com sucesso.")
+            self.logger.warning("Extraction completed successfully.")
         except Exception as exc:
             self.logger.error(exc, exc_info=True)
             self.add_execution_info(data_source='order_details', msg='Failed', date=date)
