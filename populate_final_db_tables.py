@@ -68,22 +68,6 @@ class NorthwindToFinalDB(BaseLogger):
         self.__engine = create_engine(f'postgresql://{self.__user_db}:{self.__password_db}@{self.__host}:{self.__port}/{self.__database_name}')
         self.__logger = self.setup_logger("STEPTWO:NORTHWIND:LOAD")
         self._northwind_path = 'local_storage/northwind_db/'
-
-    # def setup_logger(self):
-    #     ''' Setup log configuration in 'process_monitor.log' '''
-    #     logger = logging.getLogger("STEPTWO:NORTHWIND:LOAD")
-    #     logger.setLevel(logging.WARNING)
-    #     if not logger.handlers:
-    #         formatter = logging.Formatter("STEPTWO:NORTHWIND:LOAD:%(asctime)s:%(message)s", datefmt="%Y:%m:%d_%H:%M")
-
-    #         file_handler = logging.FileHandler("process_monitor.log")
-    #         file_handler.setFormatter(formatter)
-    #         logger.addHandler(file_handler)
-
-    #         stream_handler = logging.StreamHandler()
-    #         stream_handler.setFormatter(formatter)
-    #         logger.addHandler(stream_handler)
-    #     return logger
     
     def setup_initial_paths(self):
         if not os.path.exists(self._northwind_path):
@@ -112,7 +96,7 @@ class NorthwindToFinalDB(BaseLogger):
             sys.exit(1)
 
 
-class OrdersToFinalDB:
+class OrdersToFinalDB(BaseLogger):
     def __init__(self):
         load_dotenv()
         self.__host = os.getenv("DBFINAL_HOST")
@@ -121,23 +105,8 @@ class OrdersToFinalDB:
         self.__database_name = os.getenv("DBFINAL_DATABASE")
         self.__port = os.getenv("DBFINAL_PORT")
         self.__engine = create_engine(f'postgresql://{self.__user_db}:{self.__password_db}@{self.__host}:{self.__port}/{self.__database_name}')
-        self.logger = self.setup_logger()
+        self.logger = self.setup_logger("STEPTWO:ORDERS:LOAD")
         self.order_details_path = 'local_storage/order_details/'
-
-    def setup_logger(self):
-        ''' Setup log configuration in 'process_monitor.log' '''
-        logger = logging.getLogger("STEPTWO:ORDERS:LOAD")
-        logger.setLevel(logging.WARNING)
-        if not logger.handlers:
-            formatter = logging.Formatter("STEPTWO:ORDERS:LOAD:%(asctime)s:%(message)s", datefmt="%Y:%m:%d_%H:%M")
-            file_handler = logging.FileHandler("process_monitor.log")
-            file_handler.setFormatter(formatter)
-            logger.addHandler(file_handler)
-
-            stream_handler = logging.StreamHandler()
-            stream_handler.setFormatter(formatter)
-            logger.addHandler(stream_handler)
-        return logger
     
     def setup_initial_paths(self):
         if not os.path.exists(self.order_details_path):

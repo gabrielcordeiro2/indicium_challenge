@@ -19,21 +19,6 @@ class StepOneOrders(BaseLogger):
     def __init__(self):
         self.logger = self.setup_logger('STEPONE:ORDERS:EXTRACTION')
 
-    # def setup_logger(self):
-    #     ''' Setup log configuration in 'process_monitor.log' '''
-    #     logger = logging.getLogger("STEPONE:ORDERS:EXTRACTION")
-    #     logger.setLevel(logging.WARNING)
-    #     formatter = logging.Formatter("STEPONE:ORDERS:EXTRACTION:%(asctime)s:%(message)s", datefmt="%Y:%m:%d_%H:%M")
-        
-    #     file_handler = logging.FileHandler("process_monitor.log")
-    #     file_handler.setFormatter(formatter)
-    #     logger.addHandler(file_handler)
-
-    #     stream_handler = logging.StreamHandler()
-    #     stream_handler.setFormatter(formatter)
-    #     logger.addHandler(stream_handler)
-    #     return logger
-
     def add_execution_info(self, data_source, msg, date=datetime.now().strftime('%Y-%m-%d')):
         ''' Insert execution status inside 'execution_checker.json' '''
         file_path = 'execution_checker.json'

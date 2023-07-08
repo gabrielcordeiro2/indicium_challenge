@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine, text
+from base_logger import BaseLogger
 from datetime import datetime
 from dotenv import load_dotenv
 import pandas as pd
@@ -7,7 +8,7 @@ import sys
 import os
 
 
-class StepTwoQueryOrders:
+class StepTwoQueryOrders(BaseLogger):
     def __init__(self):
         load_dotenv()
         self.__host = os.getenv("DBFINAL_HOST")
@@ -16,23 +17,8 @@ class StepTwoQueryOrders:
         self.__database_name = os.getenv("DBFINAL_DATABASE")
         self.__port = os.getenv("DBFINAL_PORT")
         self.__engine = create_engine(f'postgresql://{self.__user_db}:{self.__password_db}@{self.__host}:{self.__port}/{self.__database_name}')
-        self.logger = self.setup_logger()
+        self.logger = self.setup_logger("STEPTWO:QUERYRESULTS")
         self.order_details_path = 'local_storage/order_details/'
-
-    def setup_logger(self):
-        ''' Setup log configuration in 'process_monitor.log' '''
-        logger = logging.getLogger("STEPTWO:QUERYRESULTS")
-        logger.setLevel(logging.WARNING)
-        if not logger.handlers:
-            formatter = logging.Formatter("STEPTWO:QUERYRESULTS:%(asctime)s:%(message)s", datefmt="%Y:%m:%d_%H:%M")
-            file_handler = logging.FileHandler("process_monitor.log")
-            file_handler.setFormatter(formatter)
-            logger.addHandler(file_handler)
-
-            stream_handler = logging.StreamHandler()
-            stream_handler.setFormatter(formatter)
-            logger.addHandler(stream_handler)
-        return logger
     
     def query_results(self):
         with open("data/query_orders.sql", "r") as sql_file:

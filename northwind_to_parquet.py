@@ -30,21 +30,6 @@ class StepOneNorthwind(BaseLogger):
         self.__engine = create_engine(f'postgresql://{self.__user_db}:{self.__password_db}@{self.__host}:{self.__port}/{self.__database_name}')
         self.logger = self.setup_logger("STEPONE:NORTHWIND:EXTRACTION")
 
-    # def setup_logger(self):
-    #     ''' Setup log configuration in 'process_monitor.log' '''
-    #     logger = logging.getLogger("STEPONE:NORTHWIND:EXTRACTION")
-    #     logger.setLevel(logging.WARNING)
-    #     formatter = logging.Formatter("STEPONE:NORTHWIND:EXTRACTION:%(asctime)s:%(message)s", datefmt="%Y:%m:%d_%H:%M")
-        
-    #     file_handler = logging.FileHandler("process_monitor.log")
-    #     file_handler.setFormatter(formatter)
-    #     logger.addHandler(file_handler)
-
-    #     stream_handler = logging.StreamHandler()
-    #     stream_handler.setFormatter(formatter)
-    #     logger.addHandler(stream_handler)
-    #     return logger
-
     def get_tables_list(self, engine, schema):
         query = f""" SELECT table_name FROM information_schema.tables WHERE table_schema = '{schema}'; """
         with engine.connect() as conn:
