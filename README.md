@@ -58,6 +58,15 @@ Para subir ambos os bancos com Docker, execute o comando abaixo:
 
 **OBS:** Caso queira posteriormente destruir os bancos com Docker, execute o comando `docker compose down`
 
+### Criando ambiente virtual e instalando os pacotes
+
+Para criar um ambiente virtual onde os pacotes ficarão encapsulado, execute o comando abaixo no terminal:
+- `python -m venv venv`
+- `source venv/bin/activate` (Esse comando pode variar de acordo com o sistema operacional)
+
+Agora execute o comando abaixo para instalar os pacotes:
+- `pip install -r requirements.txt`
+
 ### Executando o pipeline
 
 Ainda no terminal, execute o comando abaixo para rodar o pipeline completo:
